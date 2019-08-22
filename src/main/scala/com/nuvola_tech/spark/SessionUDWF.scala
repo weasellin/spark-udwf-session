@@ -28,7 +28,7 @@ object MyUDWF {
 
     protected val assignSession =  If(LessThanOrEqual(Subtract(timestamp, aggBufferAttributes(1)), sessionWindow),
       aggBufferAttributes(0), // if
-      ScalaUDF( createNewSession, StringType, children = Nil))
+      ScalaUDF( createNewSession, StringType, children = Nil, inputsNullSafe = Nil))
 
     override val initialValues: Seq[Expression] =  nullString :: zero :: Nil
     override val updateExpressions: Seq[Expression] =
